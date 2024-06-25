@@ -24,24 +24,27 @@ const FormSchema = z.object({
     valor: z.coerce.number({ message: "Esse campo aceita somente números" }).min(1, { message: "Mínimo 1 caractere" }),
 })
 
-export function InputForm({ refetch }: { refetch: any }) {
+export function EditForm({ refetch, values }: { refetch: any, values: any }) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            codigo: 0,
-            nome: "",
-            descricao: "",
-            valor: 0,
+            codigo: values.codigo,
+            nome: values.nome,
+            descricao: values.descricao,
+            valor: values.valor,
         },
     })
 
     async function onSubmit(fields: z.infer<typeof FormSchema>) {
 
-        axios.post("http://localhost:3000/src/Products.php", fields).then((response) => {
+        axios.put("http://localhost:3000/src/Products.php", {
+            id: values.id,
+            ...fields
+        }).then((response) => {
             console.log(response);
             if (response.data == 'sucesso' || response.status == 200) {
                 toast({
-                    title: "Produto cadastrado",
+                    title: "Produto atualizado",
                 })
                 refetch()
             }
@@ -108,7 +111,7 @@ export function InputForm({ refetch }: { refetch: any }) {
                     />
 
                     <div className="flex">
-                        <Button className="bg-emerald-700 mr-auto" type="submit">Cadastrar</Button>
+                        <Button className="bg-emerald-700 mr-auto" type="submit">Atualizar</Button>
 
                         <DialogClose asChild>
                             <Button className="bg-red-500">Fechar</Button>
