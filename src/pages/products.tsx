@@ -35,7 +35,7 @@ function Products() {
         queryKey: ['todos'],
         queryFn: () => {
             return axios
-                .get("http://localhost:3000/src/Users.php")
+                .get("http://localhost:3000/src/Products.php")
                 .then(res => res.data)
         },
     })

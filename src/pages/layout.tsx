@@ -39,13 +39,13 @@ function Layout() {
                     }>
                         <img src={prodcut} alt="prodcuts" />
                     </Button>
-                    <Button variant="ghost" className="mt-4  pr-2 pl-2" onClick={() =>
+                    {/* <Button variant="ghost" className="mt-4  pr-2 pl-2" onClick={() =>
                         navigate({
                             to: '/app/users',
                         })
                     }>
                         <img src={person} alt="person" />
-                    </Button>
+                    </Button> */}
 
                 </div>
 
